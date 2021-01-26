@@ -19,7 +19,7 @@ export interface Product {
 })
 export class ProductService {
 
-  url = 'http://localhost:3000/products';
+  url = 'https://my-json-server.typicode.com/nelsoncastro/primeng-angular/products';
 
   // Headers
   httpOptions = {
