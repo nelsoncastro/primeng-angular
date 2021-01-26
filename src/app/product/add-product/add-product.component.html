@@ -1,0 +1,70 @@
+<p-toast></p-toast>
+<p-confirmPopup></p-confirmPopup>
+
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<div class="p-field p-col-12 p-md-12" style="margin: 0px !important;"></div>
+<div class="p-field p-col-12 p-md-12" style="margin: 0px !important;">
+  <form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)">
+    <p-panel>
+      <ng-template pTemplate="header">
+          Cadastro de Produtos
+      </ng-template>
+
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-4">
+            <label for="name">Nome</label>
+            <input formControlName="name" id="name" type="text" pInputText>
+        </div>
+        <div class="p-field p-col-12 p-md-2">
+          <label for="country">País de Origem</label>
+          <p-dropdown [options]="countrys" formControlName="country" id="country"
+            optionValue="code" optionLabel="name"></p-dropdown>
+        </div>
+        <div class="p-field p-col-12 p-md-2">
+          <label for="price">Preço</label>
+          <input currencyMask formControlName="price" min="0.0" class="p-inputtext"
+            style="margin: 0 !important; width: 100% !important;"/>
+        </div>
+        <div class="p-field p-col-12 p-md-2">
+          <label for="quantity">Quatidade</label>
+          <p-inputNumber formControlName="quantity" [useGrouping]="false" mode="decimal"
+          [min]="0" [max]="99999" id="quantity"></p-inputNumber>
+        </div>
+        <div class="p-field p-col-12 p-md-2 p-lg-2">
+          <label for="description" style="display: block; width: 100%;">Categoria</label>
+          <div *ngFor="let category of categories" class="p-field-checkbox" style="margin-left: 0.5rem; display: inline-block;">
+            <p-radioButton [inputId]="category.key" [value]="category.key" formControlName="category"></p-radioButton>
+            <label [for]="category.key">{{category.name}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-10">
+          <label for="description">Descrição</label>
+          <textarea formControlName="description" id="description" [rows]="5" [cols]="30"
+          pInputTextarea autoResize="autoResize" placeholder="escreva qualquer coisa"></textarea>
+        </div>
+        <div class="p-field p-col-12 p-md-2">
+          <label for="rate">Avaliação</label>
+          <p-rating formControlName="rate" id="rate" [stars]="5" [cancel]="false"></p-rating>
+        </div>
+      </div>
+
+      <ng-template pTemplate="footer">
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-5"></div>
+          <div class="p-field p-col-12 p-md-1">
+            <button pButton type="submit" label="Salvar" [disabled]="!validateForm.valid"
+            class="p-button-outlined" style="margin-top: 25px !important"></button>
+            </div>
+            <div class="p-field p-col-12 p-md-1">
+              <button pButton type="reset" label="Cancelar" (click)="resetForm()"
+              class="p-button-outlined p-button-secondary" style="margin-top: 25px !important"></button>
+          </div>
+          <div class="p-field p-col-12 p-md-5"></div>
+        </div>
+      </ng-template>
+
+    </p-panel>
+  </form>
+</div>
